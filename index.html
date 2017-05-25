@@ -1,0 +1,45 @@
+<html>
+<body>
+<script>
+var api_key="he0b5r1o"; 
+var train=13352;
+var _url = "http://api.railwayapi.com/route/train/"+train+"/apikey/"+api_key;
+
+
+var _s;
+var _z;
+function loadJSON(file, callback) 
+{   
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () 
+    {
+          if (xobj.readyState == 4 && xobj.status == "200") 
+          {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);  
+ }  
+ function load() 
+{
+   loadJSON(_url, function(response) 
+   {
+  		//alert(response);
+        var actual_JSON = eval('(' +response+')');//JSON.parse(response);
+      
+       
+    });
+}
+load();
+document.write("url is "+_url+"<br>");
+document.write(actual_JSON);
+
+</script>
+</body>
+</html>
+
+
